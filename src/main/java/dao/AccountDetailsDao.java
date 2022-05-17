@@ -6,8 +6,6 @@ import model.AccountDetailsPojo;
 
 public interface AccountDetailsDao {
 	
-		//Read funds from user account
-		AccountDetailsPojo displayFunds(AccountDetailsPojo accountDetailsPojo)throws SystemException;
 		//Withdraw funds
 		AccountDetailsPojo withdrawFunds(AccountDetailsPojo accountDetailsPojo)throws SystemException, OverDraftException;
 		//Deposit funds

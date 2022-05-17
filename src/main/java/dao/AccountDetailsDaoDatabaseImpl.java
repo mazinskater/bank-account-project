@@ -14,7 +14,17 @@ public class AccountDetailsDaoDatabaseImpl implements AccountDetailsDao {
 	@Override
 	public AccountDetailsPojo withdrawFunds(AccountDetailsPojo accountDetailsPojo)
 			throws SystemException, OverDraftException {
-		return null;
+		Connection conn = null;
+		try {
+			conn = DBUtil.makeConnection();
+			Statement stmt = conn.createStatement();
+			String query = "UPDATE account_details SET funds=" + accountDetailsPojo.getFunds() + "WHERE user_id =" + accountDetailsPojo.getUserId();
+			int rowsAffected = stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SystemException();
+		}
+		return accountDetailsPojo;
 	}
 
 	@Override
@@ -23,24 +33,16 @@ public class AccountDetailsDaoDatabaseImpl implements AccountDetailsDao {
 		try {
 			conn = DBUtil.makeConnection();
 			Statement stmt = conn.createStatement();
-			String query = "UPDATE account_details"
+			String query = "UPDATE account_details SET funds=" + accountDetailsPojo.getFunds() + "WHERE user_id =" + accountDetailsPojo.getUserId();
+			int rowsAffected = stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SystemException();
 		}
-		return null;
+		return accountDetailsPojo;
 	}
 
-	@Override
-	public AccountDetailsPojo displayFunds(AccountDetailsPojo accountDetailsPojo) throws SystemException {
-		ResultSet currentUserFunds;
-		Connection conn = null;
-		try {
-			conn = DBUtil.makeConnection();
-			Statement stmt = conn.createStatement();
-			String query = "SELECT funds FROM account_details WHERE user_id=" + accountDetailsPojo.getUserId();
-			ResultSet resultSet = stmt.executeQuery(query);
-			
-		return resultSet;
-	}
-	
+
 	@Override
 	public AccountDetailsPojo getAUserAccount(int userId) throws SystemException {
 		Connection conn = null;
