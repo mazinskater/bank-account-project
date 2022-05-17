@@ -29,9 +29,9 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	@Override
 	public AccountDetailsPojo withdrawFunds(AccountDetailsPojo accountDetailsPojo)
 			throws SystemException, OverDraftException {
+		
 		if(accountDetailsPojo.getFunds() < 0) {
 			System.out.println("Account is overdrawn. Can not proceed with transaction");
-			
 		}
 		
 		return accountDetailsDao.withdrawFunds(accountDetailsPojo);

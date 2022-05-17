@@ -127,15 +127,20 @@ public class BankAccountManagmentSystem {
 							double ammountToWithdraw = scan.nextDouble();
 							double newWithdrawnAccountBalance = currentUserAccountDetailsPojo.getFunds()
 									- ammountToWithdraw;
-							currentUserAccountDetailsPojo.setFunds(newWithdrawnAccountBalance);
-							try {
-								accountDetailsService.withdrawFunds(currentUserAccountDetailsPojo);
-							} catch (SystemException | OverDraftException e) {
-								System.out.println(e.getMessage());
+							if (newWithdrawnAccountBalance < 0) {
+								System.out.println("Account is overdrawn. Previous transaction has been terminated");
 								break;
+							} else {
+								currentUserAccountDetailsPojo.setFunds(newWithdrawnAccountBalance);
+								try {
+									accountDetailsService.withdrawFunds(currentUserAccountDetailsPojo);
+								} catch (SystemException | OverDraftException e) {
+									System.out.println(e.getMessage());
+									break;
+								}
+								System.out.println(
+										"Your new account balance is: $" + currentUserAccountDetailsPojo.getFunds());
 							}
-							System.out.println(
-									"Your new account balance is: $" + currentUserAccountDetailsPojo.getFunds());
 						}
 						System.out.println("Do you want to continue?(y/n)");
 						innerProceed = scan.next().charAt(0);
