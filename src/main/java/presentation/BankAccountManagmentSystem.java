@@ -81,6 +81,7 @@ public class BankAccountManagmentSystem {
 					break;
 				} else {
 					currentUserAccountDetailsPojo.setUserId(currentUserId);
+					System.out.println("*******************************");
 					System.out.println("Login succesful!!");
 					System.out.println("The current users ID is " + currentUserAccountDetailsPojo.getUserId());
 
@@ -109,6 +110,7 @@ public class BankAccountManagmentSystem {
 							break;
 						case 2:
 							System.out.println("Enter the ammount you would like to deposit: ");
+
 							double ammountToDeposit = scan.nextDouble();
 							double newDepositAccountBalance = currentUserAccountDetailsPojo.getFunds()
 									+ ammountToDeposit;
@@ -119,8 +121,10 @@ public class BankAccountManagmentSystem {
 								System.out.println(e.getMessage());
 								break;
 							}
+							System.out.println("*******************************");
 							System.out.println(
 									"Your new account balance is: $" + currentUserAccountDetailsPojo.getFunds());
+							System.out.println("*******************************");
 							break;
 						case 3:
 							System.out.println("Enter the ammount you would like to withdraw: ");
@@ -138,9 +142,14 @@ public class BankAccountManagmentSystem {
 									System.out.println(e.getMessage());
 									break;
 								}
+								System.out.println("*******************************");
 								System.out.println(
 										"Your new account balance is: $" + currentUserAccountDetailsPojo.getFunds());
+								System.out.println("*******************************");
+								break;
 							}
+						default:
+
 						}
 						System.out.println("Do you want to continue?(y/n)");
 						innerProceed = scan.next().charAt(0);
@@ -154,7 +163,7 @@ public class BankAccountManagmentSystem {
 			default:
 
 			}
-			System.out.println("Do you want to continue?");
+			System.out.println("Do you want to continue?(y/n)");
 			proceed = scan.next().charAt(0);
 		}
 		System.out.println("*******************************");
